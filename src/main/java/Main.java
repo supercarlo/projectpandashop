@@ -4,9 +4,11 @@ import static spark.Spark.*;
 
 public class Main {
     public static void main(String[] args) {
-
         Html html = new Html();
-//        html.renderContent();
+        DBC dbc = new DBC();
+
+        dbc.Conneciton();
+        staticFileLocation("/resources");
 
         BasicConfigurator.configure();
 //        get("/Main", (req, res) -> "Hello World");
