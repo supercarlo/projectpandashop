@@ -7,7 +7,7 @@ public class Main {
         Html html = new Html();
         DBC dbc = new DBC();
 
-        dbc.Conneciton();
+        dbc.Connection();
         staticFileLocation("/resources");
 
         BasicConfigurator.configure();

@@ -12,7 +12,7 @@ public class DBC {
     //Public variable to establish SQL connection
     Connection conn;
 
-    public void Conneciton() {
+    public void Connection() {
         //Connection
         try {
             //Driver name + credentials + ip address check.
