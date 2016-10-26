@@ -5,9 +5,9 @@ import static spark.Spark.*;
 public class Main {
     public static void main(String[] args) {
         Html html = new Html();
-        DBC dbc = new DBC();
-
-        dbc.Connection();
+//        DBC dbc = new DBC();
+//
+//        dbc.Connection();
         staticFileLocation("/resources");
 
         BasicConfigurator.configure();
