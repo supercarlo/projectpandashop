@@ -16,6 +16,6 @@ public class Main {
         get("/main", ((request, response) -> html.renderContent("index.html")));
         get("/about", ((request, response) -> html.renderContent("about.html")));
         get("/login", ((request, response) -> html.renderContent("login.html")));
-
+        get("/register", ((request, response) -> html.renderContent("register.html")));
     }
 }
