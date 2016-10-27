@@ -44,11 +44,11 @@
                 </ul>
                 <div class="collapse navbar-collapse" align="right">
                     <ul>
-                        <form action="#">
-                            Username: <input type="text" name="user">
-                            Password: <input type="password" name="password">
-                            <a href="/login">Login</a>
-                            <a href="/register">Register</a>
+                        <form name="loginForm" method="post" action="/login">
+                            <input type="text" name="Username" placeholder="Username" required/>
+                            <input type="text" name="Password" placeholder="Password" required/>
+                            <input type="submit" value="Login"/>
+                            <input type="submit" value="Register"/>
                         </form>
                     </ul>
                 </div>
