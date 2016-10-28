@@ -58,3 +58,13 @@ inStock integer,
 usernameCustomer text, -- foreign key Customer
 shoppingCartId text -- foreign key ShoppingCart
 );
+
+
+insert into Customer(usernameCustomer, passwordCustomer, level ,firstname, lastname, birthdate, creditcardinfo, membersince)
+values('Pieter', 'Knakworstje', 'user', 'Pieter', 'Post','1902-04-16', '182373828372838', '2001-09-11’),
+('Kiter', 'Braworstje', 'user', 'Keter', 'Kost','1903-04-17', '192373828372839', '2003-09-11'),
+('Kier', 'Brawostje', ‘admin’, 'Keer', 'Kot','1904-04-17', '202373828372839', '2004-09-11’),
+('Kieter', 'Brakworstje', 'user', 'Kieter', 'Kotst','1902-04-17', '182373828372839', '2002-09-11')
+insert into Adress(country, city, street ,anumber, postalcode, bsn)
+values('Holland', 'Ede', 'Scheepsstraat', '63', '5014ML','182372838'),
+('Holland', 'Monster', 'Schepsstraat', '62', '5014MT','182377338'),
