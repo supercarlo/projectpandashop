@@ -1,0 +1,60 @@
+create table Adress(
+adressId char(11) primary key,
+city text,
+postalCode text,
+street text,
+houseNumber text
+);
+
+create table Customer(
+usernameCustomer text primary key,
+passwordCustomer text,
+level text,
+firstName text,
+lastName text,
+birthDate date,
+creditCardInfo char(16),
+memberSince date,
+adressId char(11) -- foreign key Adress
+);
+
+create table WishList(
+wishListId char(9) primary key,
+messageWishList text,
+userNameCustomer text -- foreign key Customer
+);
+
+create table ProductCategory(
+categoryName text primary key,
+description text
+);
+
+create table Product(
+productId char(10) primary key,
+info text,
+image text,
+nameProduct text,
+price text,
+categoryName text -- foreign key ProductCategory
+);
+
+create table WishListProducts(
+productId char(10), -- foreign key Product
+wishListId char(9), -- foreign key WishList
+quantity integer
+);
+
+create table ShoppingCart(
+shoppingCartId text Primary key,
+usernameCustomer text, -- foreign key Customer
+productId char(10) -- foreign key Product
+);
+
+create table Orders(
+orderId char(9) primary key,
+nameProduct text,
+price text,
+inStock integer,
+usernameCustomer text, -- foreign key Customer
+shoppingCartId text -- foreign key ShoppingCart
+);
