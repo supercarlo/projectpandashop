@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Html html = new Html();
         SqlQueries sql = new SqlQueries();
+        User customer = new User();
         DBC dbc = new DBC();
 
         dbc.Connection();
@@ -17,6 +18,7 @@ public class Main {
 //        get("/Main", (req, res) -> "Hello World");
         get("/main", ((request, response) -> html.renderContent("index.html")));
         get("/about", ((request, response) -> html.renderContent("about.html")));
+        get("/register", ((request, response) -> html.renderContent("register.html")));
         post("/login", ((request, response) -> {
             String login = null;
 
@@ -45,6 +47,33 @@ public class Main {
             return login;
         }));
 
-        get("/register", ((request, response) -> html.renderContent("register.html")));
+        post("/register", (request, response) -> {
+            String register = null;
+
+
+            String firstname = request.queryParams("firstname");
+            String lastname = request.queryParams("lastname");
+            String username = request.queryParams("username");
+            String password = request.queryParams("password");
+            String birthdate = request.queryParams("birthday");
+            String credicardinfo = request.queryParams("credicardinfo");
+            String membersince = request.queryParams("membersince");
+            String city = request.queryParams("city");
+            String postalcode = request.queryParams("postalcode");
+            String street = request.queryParams("street");
+            String housenumber = request.queryParams("housenumber");
+            String userlevel = "user";
+            System.out.println(firstname);
+            System.out.println(lastname);
+            System.out.println(birthdate);
+
+
+            customer.createCustomer(username, password, userlevel , firstname, lastname, birthdate, credicardinfo, membersince);
+            customer.createAdress(username, city, postalcode, street, housenumber);
+
+
+
+            return register;
+        });
     }
 }

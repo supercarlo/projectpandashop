@@ -1,11 +1,3 @@
-create table Adress(
-adressId char(11) primary key,
-city text,
-postalCode text,
-street text,
-houseNumber text
-);
-
 create table Customer(
 usernameCustomer text primary key,
 passwordCustomer text,
@@ -14,9 +6,16 @@ firstName text,
 lastName text,
 birthDate date,
 creditCardInfo char(16),
-memberSince date,
-adressId char(11) -- foreign key Adress
+memberSince date
 );
+
+create table Adress(
+  usernameCustomer text primary key,
+  city text,
+  postalCode text,
+  street text,
+  houseNumber text
+  );
 
 create table WishList(
 wishListId char(9) primary key,
