@@ -17,6 +17,7 @@ public class Main {
 //        get("/Main", (req, res) -> "Hello World");
         get("/main", ((request, response) -> html.renderContent("index.html")));
         get("/about", ((request, response) -> html.renderContent("about.html")));
+        get("/register", ((request, response) -> html.renderContent("register.html")));
         post("/login", ((request, response) -> {
             String login = null;
 
@@ -53,6 +54,17 @@ public class Main {
             String lastname = request.queryParams("Lastname");
             String username = request.queryParams("Username");
             String password = request.queryParams("Password");
+            String birthdate = request.queryParams("Birthdate");
+            String credicardinfo = request.queryParams("Credicardinfo");
+            String membersince = request.queryParams("Membersince");
+            String city = request.queryParams("City");
+            String postalcode = request.queryParams("Postalcode");
+            String street = request.queryParams("Street");
+            String housenumber = request.queryParams("Housenumber");
+
+            User customer = new User();
+            customer.createCustomer(username, password, " user" , firstname, lastname, birthdate, credicardinfo, membersince );
+            customer.createAdress(username, city, postalcode, street, housenumber);
 
 
 
