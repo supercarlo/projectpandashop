@@ -1,8 +1,8 @@
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.apache.log4j.BasicConfigurator;
 import spark.Spark;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class Main {
     public static void main(String[] args) {
