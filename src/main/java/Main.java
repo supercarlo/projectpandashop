@@ -1,13 +1,14 @@
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.apache.log4j.BasicConfigurator;
 import spark.Spark;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class Main {
     public static void main(String[] args) {
         Html html = new Html();
         SqlQueries sql = new SqlQueries();
+        User customer = new User();
         DBC dbc = new DBC();
 
         dbc.Connection();
@@ -50,20 +51,24 @@ public class Main {
             String register = null;
 
 
-            String firstname = request.queryParams("Firstname");
-            String lastname = request.queryParams("Lastname");
-            String username = request.queryParams("Username");
-            String password = request.queryParams("Password");
-            String birthdate = request.queryParams("Birthdate");
-            String credicardinfo = request.queryParams("Credicardinfo");
-            String membersince = request.queryParams("Membersince");
-            String city = request.queryParams("City");
-            String postalcode = request.queryParams("Postalcode");
-            String street = request.queryParams("Street");
-            String housenumber = request.queryParams("Housenumber");
+            String firstname = request.queryParams("firstname");
+            String lastname = request.queryParams("lastname");
+            String username = request.queryParams("username");
+            String password = request.queryParams("password");
+            String birthdate = request.queryParams("birthday");
+            String credicardinfo = request.queryParams("credicardinfo");
+            String membersince = request.queryParams("membersince");
+            String city = request.queryParams("city");
+            String postalcode = request.queryParams("postalcode");
+            String street = request.queryParams("street");
+            String housenumber = request.queryParams("housenumber");
+            String userlevel = "user";
+            System.out.println(firstname);
+            System.out.println(lastname);
+            System.out.println(birthdate);
 
-            User customer = new User();
-            customer.createCustomer(username, password, " user" , firstname, lastname, birthdate, credicardinfo, membersince );
+
+            customer.createCustomer(username, password, userlevel , firstname, lastname, birthdate, credicardinfo, membersince);
             customer.createAdress(username, city, postalcode, street, housenumber);
 
 
