@@ -45,6 +45,18 @@ public class Main {
             return login;
         }));
 
-        get("/register", ((request, response) -> html.renderContent("register.html")));
+        post("/register", (request, response) -> {
+            String register = null;
+
+
+            String firstname = request.queryParams("Firstname");
+            String lastname = request.queryParams("Lastname");
+            String username = request.queryParams("Username");
+            String password = request.queryParams("Password");
+
+
+
+            return register;
+        });
     }
 }
