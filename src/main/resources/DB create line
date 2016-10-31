@@ -9,7 +9,7 @@ houseNumber text
 create table Customer(
 usernameCustomer text primary key,
 passwordCustomer text,
-level text,
+userlevel text,
 firstName text,
 lastName text,
 birthDate date,
