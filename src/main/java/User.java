@@ -12,7 +12,7 @@ public class User {
         try {
             DBC databasePandaShop = new DBC();
             Statement stat = databasePandaShop.Connection();
-            String query = (("insert into Customer(usernameCustomer, passwordCustomer, level ,firstname, lastname, birthdate, creditcardinfo membersince) values("+ UsernameCustomer+ ", "+ PasswordCustomer + ", " + Level+ ", " + firstname + ", " + LastName + ", " + BirthDate + ", " + CreditCardInfo + ", " + MemberSince + ""));
+            String query = (("insert into Customer(usernameCustomer, passwordCustomer, userlevel ,firstname, lastname, birthdate, creditcardinfo, membersince) values("+ UsernameCustomer+ ", "+ PasswordCustomer + ", " + Level+ ", " + firstname + ", " + LastName + ", " + BirthDate + ", " + CreditCardInfo + ", " + MemberSince + ""));
             ResultSet rs = stat.executeQuery(query);
             rs.close();
         } catch (Exception e) {
@@ -40,6 +40,45 @@ public class User {
             DBC databasePandaShop = new DBC();
             Statement stat = databasePandaShop.Connection();
             String query = (("UPDATE Customer SET "+ columnName + " = "+ newData +" WHERE usernamecustomer = "+ UsernameCustomer +";"));
+            ResultSet rs = stat.executeQuery(query);
+            rs.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    public void createAdress(String UsernameCustomer, String city, String postalcode, String street, String househumber) {
+        try {
+            DBC databasePandaShop = new DBC();
+            Statement stat = databasePandaShop.Connection();
+            String query = (("insert into Adress(usernamecustomer, city, postalcode ,street, housenumber) values("+ UsernameCustomer+ ", "+ city + ", " + postalcode+ ", " + street + ", " + househumber + ""));
+            ResultSet rs = stat.executeQuery(query);
+            rs.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+    }
+    public void deleteAdress(String UsernameCustomer){
+        try {
+            DBC databasePandaShop = new DBC();
+            Statement stat = databasePandaShop.Connection();
+            String query = (("DELETE FROM Adress WHERE usernameCustomer = " + UsernameCustomer + ""));
+            ResultSet rs = stat.executeQuery(query);
+            rs.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+    }
+    public void alterAdress(String columnName, String newData, String UsernameCustomer){
+
+        try {
+            DBC databasePandaShop = new DBC();
+            Statement stat = databasePandaShop.Connection();
+            String query = (("UPDATE Adress SET "+ columnName + " = "+ newData +" WHERE usernamecustomer = "+ UsernameCustomer +";"));
             ResultSet rs = stat.executeQuery(query);
             rs.close();
         } catch (Exception e) {
