@@ -39,7 +39,7 @@ public class SqlQueries {
                 System.exit(0);
             }
         }
-
+ 
         if (countExistenceofPassword == 1) {
             try {
                 String query = ("select userlevel from Customer where usernamecustomer = '" + customerUsername + "' and userlevel = 'admin';");
