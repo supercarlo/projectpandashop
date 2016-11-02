@@ -34,7 +34,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="firstname" placeholder="First Name" class="form-control" type="text" id="firstname" tabindex="2"  >
+                        <input pattern=".{2,15}" required title="5 to 10 characters" name="firstname" placeholder="First Name" class="form-control" type="text" id="firstname" tabindex="2"  >
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="lastname" placeholder="Last Name" class="form-control" type="text" id="lastname" tabindex="2"  >
+                        <input pattern=".{2,15}" required title="2 to 15 characters"input name="lastname" placeholder="Last Name" class="form-control" type="text" id="lastname" tabindex="2"  >
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="username" placeholder="Username" class="form-control"  type="text" id="username">
+                        <input pattern=".{5,10}" required title="5 to 10 characters" input name="username" placeholder="Username" class="form-control"  type="text" id="username">
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="postalcode" placeholder="Zip Code" class="form-control"  type="text" id="postalcode">
+                        <input pattern=".{6,6}" required title="5 to 10 characters" name="postalcode" placeholder="Zip Code" class="form-control"  type="text" id="postalcode">
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="street" placeholder="Street" class="form-control" type="text" id="street">
+                        <input pattern=".{2,30}" required title="2 to 30 characters" name="street" placeholder="Street" class="form-control" type="text" id="street">
 
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="housenumber" placeholder="Housenumber" class="form-control" type="text" id="housenumber">
+                        <input pattern=".{1,6}" required title="1 to 6 characters" name="housenumber" placeholder="Housenumber" class="form-control" type="text" id="housenumber">
 
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="city" placeholder="City" class="form-control"  type="text" id="city">
+                        <input pattern=".{2,30}" required title="2 to 30 characters" name="city" placeholder="City" class="form-control"  type="text" id="city">
                     </div>
                 </div>
             </div>
@@ -245,7 +245,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                        <input name="creditcardinfo" placeholder="Creditcard number" class="form-control" type="text" id="creditcardinfo">
+                        <input pattern=".{16,16}" required title="16 characters" name="creditcardinfo" placeholder="Creditcard number" class="form-control" type="text" id="creditcardinfo">
                     </div>
                 </div>
             </div>
