@@ -50,8 +50,9 @@ public class User { // create a customer (with an andress) in DataBase
         try {
             DBC databasePandaShop = new DBC();
             Statement stat = databasePandaShop.Connection();
-            String query = ("DELETE FROM Customer WHERE usernameCustomer = " + UsernameCustomer + ";");
+            String query = ("DELETE FROM Customer WHERE usernameCustomer = '" + UsernameCustomer + "';");
             stat.executeUpdate(query);
+            stat.getConnection().commit();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -63,9 +64,9 @@ public class User { // create a customer (with an andress) in DataBase
         try {
             DBC databasePandaShop = new DBC();
             Statement stat = databasePandaShop.Connection();
-            String query = ("UPDATE Customer SET "+ columnName + " = "+ newData +" WHERE usernamecustomer = "+ UsernameCustomer +";");
+            String query = ("UPDATE Customer SET '"+ columnName + "' = '"+ newData +"' WHERE usernamecustomer = '"+ UsernameCustomer +"';");
             stat.executeUpdate(query);
-
+            stat.getConnection().commit();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -89,8 +90,9 @@ public class User { // create a customer (with an andress) in DataBase
         try {
             DBC databasePandaShop = new DBC();
             Statement stat = databasePandaShop.Connection();
-            String query = ("DELETE FROM Adress WHERE usernameCustomer = " + UsernameCustomer + ";");
+            String query = ("DELETE FROM Adress WHERE usernameCustomer = '" + UsernameCustomer + "';");
             stat.executeUpdate(query);
+            stat.getConnection().commit();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -102,7 +104,7 @@ public class User { // create a customer (with an andress) in DataBase
         try {
             DBC databasePandaShop = new DBC();
             Statement stat = databasePandaShop.Connection();
-            String query = ("UPDATE Adress SET "+ columnName + " = "+ newData +" WHERE usernamecustomer = "+ UsernameCustomer +";");
+            String query = ("UPDATE Adress SET '"+ columnName + "' = '"+ newData +"' WHERE usernamecustomer = '"+ UsernameCustomer +"';");
             stat.executeUpdate(query);
             stat.getConnection().commit();
         } catch (Exception e) {
@@ -110,4 +112,18 @@ public class User { // create a customer (with an andress) in DataBase
             System.exit(0);
         }
     }
+    public void selectUsers(){
+
+        try {
+            DBC databasePandaShop = new DBC();
+            Statement stat = databasePandaShop.Connection();
+            String query = ("Select usernamecustomer from customer;");
+            stat.executeUpdate(query);
+            stat.getConnection().commit();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
 }

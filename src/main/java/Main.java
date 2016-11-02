@@ -1,6 +1,10 @@
 import org.apache.log4j.BasicConfigurator;
 import spark.Spark;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -10,6 +14,9 @@ public class Main {
         SqlQueries sql = new SqlQueries();
         User customer = new User();
         DBC dbc = new DBC();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String dateToday = dateFormat.format(date);
 
         dbc.Connection();
         Spark.staticFileLocation("/");
@@ -55,7 +62,9 @@ public class Main {
             String lastname = request.queryParams("lastname");
             String username = request.queryParams("username");
             String password = request.queryParams("password");
-            String birthdate = request.queryParams("birthday");
+            String birthYear = request.queryParams("birthyear");
+            String birthMonth = request.queryParams("birthmonth");
+            String birthDay = request.queryParams("birthday");
             String credicardinfo = request.queryParams("credicardinfo");
             String membersince = request.queryParams("membersince");
             String city = request.queryParams("city");
@@ -63,14 +72,16 @@ public class Main {
             String street = request.queryParams("street");
             String housenumber = request.queryParams("housenumber");
             String userlevel = "user";
-            System.out.println(firstname);
-            System.out.println(lastname);
+
+
+            String birthdate = (birthYear + "-" + birthMonth + "-" + birthDay);
             System.out.println(birthdate);
+
 
             boolean testCustomerAvailibility;
 
 
-                testCustomerAvailibility = customer.createCustomer(username, password, userlevel, firstname, lastname, birthdate, credicardinfo, membersince);
+                testCustomerAvailibility = customer.createCustomer(username, password, userlevel, firstname, lastname, birthdate, credicardinfo, dateToday);
             if (testCustomerAvailibility == true) {
                 customer.createAdress(username, city, postalcode, street, housenumber);
             }
