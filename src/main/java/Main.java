@@ -3,7 +3,9 @@ import spark.Spark;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -21,6 +23,7 @@ public class Main {
         dbc.Connection();
         Spark.staticFileLocation("/");
         BasicConfigurator.configure();
+
 
 //        get("/Main", (req, res) -> "Hello World");
         get("/main", ((request, response) -> html.renderContent("index.html")));
@@ -75,7 +78,7 @@ public class Main {
 
 
             String birthdate = (birthYear + "-" + birthMonth + "-" + birthDay);
-            System.out.println(birthdate);
+
 
 
             boolean testCustomerAvailibility;
@@ -86,6 +89,8 @@ public class Main {
                 customer.createAdress(username, city, postalcode, street, housenumber);
             }
             System.out.println(testCustomerAvailibility);
+
+            ArrayList<String> aList = customer.selectUsers("usernamecustomer");
 
 
             return register;

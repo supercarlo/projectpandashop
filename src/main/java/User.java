@@ -1,10 +1,11 @@
 /**
  * Created by onno on 31-10-2016.
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.sun.org.apache.xpath.internal.SourceTree;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by onno on 31-10-2016.
@@ -112,18 +113,36 @@ public class User { // create a customer (with an andress) in DataBase
             System.exit(0);
         }
     }
-    public void selectUsers(){
+    public ArrayList<String> selectUsers(String valueName) throws SQLException {
+        DBC dbc = new DBC();
+        Statement stat = dbc.Connection();
+        ArrayList<String> listOfUsers = null;
 
         try {
-            DBC databasePandaShop = new DBC();
-            Statement stat = databasePandaShop.Connection();
-            String query = ("Select usernamecustomer from customer;");
-            stat.executeUpdate(query);
+            String query = ("SELECT '" + valueName + "' AS usernamecustomer FROM customer");
             stat.getConnection().commit();
+            ResultSet rs = stat.executeQuery(query);
+            listOfUsers = new ArrayList<String>();
+            if (rs.next()) {
+                String getUserName = rs.getString(valueName);
+                System.out.println(getUserName);
+                listOfUsers.add(getUserName);
+            }
+            //rs.close();
+            //dbc.Connection().close();
         } catch (Exception e) {
+            System.out.println("brandBlusser");
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+
+         finally {
+            if (stat != null) { stat.close(); }
+        }
+        {
+            return listOfUsers;
+        }
+
     }
 
 }
