@@ -1,11 +1,10 @@
 /**
  * Created by onno on 31-10-2016.
  */
-import com.sun.org.apache.xpath.internal.SourceTree;
-
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by onno on 31-10-2016.
@@ -113,7 +112,7 @@ public class User { // create a customer (with an andress) in DataBase
             System.exit(0);
         }
     }
-    public ArrayList<String> selectUsers(String valueName) throws SQLException {
+    public static ArrayList<String> selectUsers(String valueName) throws SQLException {
         DBC dbc = new DBC();
         Statement stat = dbc.Connection();
         ArrayList<String> listOfUsers = null;
