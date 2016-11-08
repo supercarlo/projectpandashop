@@ -10,7 +10,7 @@ public class DBC {
         try {
             //Driver name + credentials + ip address check.
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:8080/PandaWebShop", "postgres", "0000");
             c.setAutoCommit(false);
             stat = c.createStatement();
         } catch (Exception e) {

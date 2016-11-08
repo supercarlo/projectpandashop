@@ -31,7 +31,7 @@
                         <a href="#">Services</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="">${username}</a>
                     </li>
                 </ul>
             </div>

@@ -8,21 +8,39 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import static spark.Spark.get;
+import static spark.Spark.post;
+
 public class Main {
 
     public static void main(String[] args) {
+        Html html = new Html();
+        SqlQueries sql = new SqlQueries();
+        DBC dbc = new DBC();
+        Map<String, Object> map = new HashMap<>();
+        StringWriter writer = new StringWriter();
+
         final Configuration configuration = new Configuration(new Version(2, 3, 0));
         configuration.setClassForTemplateLoading(Main.class, "/");
+        Spark.staticFileLocation("/");
         BasicConfigurator.configure();
+        dbc.Connection();
 
-        Spark.get("/", (request, response) -> {
-
-            StringWriter writer = new StringWriter();
+        Spark.get("/main", (request, response) -> {
+            Template formTemplate = null;
+            String session = request.session().attribute("user");
+            String sessionAdmin = request.session().attribute("admin");
 
             try {
-                Template formTemplate = configuration.getTemplate("/index.html");
-
-                formTemplate.process(null, writer);
+                if (session!= null) {
+                    map.put("username", session);
+                    formTemplate = configuration.getTemplate("/login.ftl");
+                } else if (sessionAdmin != null) {
+                    formTemplate = configuration.getTemplate("/Admin_page.ftl");
+                } else {
+                    formTemplate = configuration.getTemplate("/index.ftl");
+                }
+                formTemplate.process(map, writer);
             } catch (Exception e) {
                 Spark.halt(500);
             }
@@ -30,109 +48,37 @@ public class Main {
             return writer;
         });
 
-        Spark.post("/sait", (request, response) -> {
-            StringWriter writer = new StringWriter();
+        post("/login", ((request, response) -> {
+            Template login = null;
 
-            try {
-                String name = request.queryParams("name") != null ? request.queryParams("name") : "anonymous";
-                String email = request.queryParams("email") != null ? request.queryParams("email") : "unknown";
+            String username = request.queryParams("Username");
+            String password = request.queryParams("Password");
 
-                Template resultTemplate = configuration.getTemplate("/result.ftl");
+            int level = sql.login(username, password);
 
-                Map<String, Object> map = new HashMap<>();
-                map.put("name", name);
-                map.put("email", email);
-
-                resultTemplate.process(map, writer);
-            } catch (Exception e) {
-                Spark.halt(500);
+            if (level == 0) {
+//                Not a register
+            } else if (level == 1) {
+//                Incorrect password
+            } else if (level == 2) {
+//                Correct info as normal user
+                request.session().attribute("user", username);
+                response.redirect("/main");
+            } else if (level == 3) {
+//                Correct info as admin
+                request.session().attribute("admin", username);
+                response.redirect("/main");
             }
+            return login;
+        }));
 
-            return writer;
-        });
+        get("/logout", ((request, response) -> {
+            request.session().removeAttribute("user");
+            response.redirect("/main");
+            return null;
+        }));
+
+        get("/register", ((request, response) -> html.renderContent("register.ftl")));
+
     }
 }
-
-//import org.apache.log4j.BasicConfigurator;
-//import spark.Spark;
-//
-//import static spark.Spark.get;
-//import static spark.Spark.post;
-//
-//public class Main {
-//    public static void main(String[] args) {
-//        Html html = new Html();
-//        SqlQueries sql = new SqlQueries();
-//        User customer = new User();
-//        DBC dbc = new DBC();
-//
-//        dbc.Connection();
-//        Spark.staticFileLocation("/");
-//        BasicConfigurator.configure();
-//
-////        get("/Main", (req, res) -> "Hello World");
-//        get("/main", ((request, response) -> html.renderContent("index.html")));
-//        get("/about", ((request, response) -> html.renderContent("about.html")));
-//        get("/register", ((request, response) -> html.renderContent("register.html")));
-//        post("/login", ((request, response) -> {
-//            String login = null;
-//
-//            String username = request.queryParams("Username");
-//            String password = request.queryParams("Password");
-//
-//            int level = sql.login(username, password);
-//
-//            if (level == 0) {
-////                Not a register
-//                System.out.println("Dont");
-//                login = "Fuck off";
-//            } else if (level == 1) {
-////                Incorrect password
-//                System.out.println("Incorrect password");
-//                login = "Wrong password";
-//            } else if (level == 2) {
-////                Correct info as normal user
-//                System.out.println("Login as user");
-//                login = "User";
-//            } else if (level == 3) {
-////                Correct info as admin
-//                System.out.println("Login as admin");
-//                login = "Admin";
-//            }
-//            return login;
-//        }));
-//
-//        post("/register", (request, response) -> {
-//            String register = null;
-//
-//
-//            String firstname = request.queryParams("firstname");
-//            String lastname = request.queryParams("lastname");
-//            String username = request.queryParams("username");
-//            String password = request.queryParams("password");
-//            String birthdate = request.queryParams("birthday");
-//            String credicardinfo = request.queryParams("credicardinfo");
-//            String membersince = request.queryParams("membersince");
-//            String city = request.queryParams("city");
-//            String postalcode = request.queryParams("postalcode");
-//            String street = request.queryParams("street");
-//            String housenumber = request.queryParams("housenumber");
-//            String userlevel = "user";
-//            System.out.println(firstname);
-//            System.out.println(lastname);
-//            System.out.println(birthdate);
-//
-//            boolean testCustomerAvailibility;
-//
-//
-//            testCustomerAvailibility = customer.createCustomer(username, password, userlevel, firstname, lastname, birthdate, credicardinfo, membersince);
-//            if (testCustomerAvailibility == true) {
-//                customer.createAdress(username, city, postalcode, street, housenumber);
-//            }
-//            System.out.println(testCustomerAvailibility);
-//
-//
-//            return register;
-//        });
-//    }
-//}
