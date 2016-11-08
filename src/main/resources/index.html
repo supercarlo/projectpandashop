@@ -45,8 +45,14 @@
                 <div class="collapse navbar-collapse" align="right">
                     <ul>
                         <li>
-                            <i id="test123">
-                            </i>
+                            <form name="loginForm" method="post" action="/login">
+                                <input type="text" name="Username" placeholder="Username" required>
+                                <input type="password" name="Password" placeholder="Password" required>
+                                <input type="submit" value="Login">
+
+                                <!--<button type="button" onclick="document.getElementById('demo').innerHTML = 'Hello JavaScript!'">Click Me!</button>-->
+                                <!--<p id="demo">JavaScript can change HTML content.</p>-->
+                            </form>
                         </li>
                         <li>
                             <form name="registerForm" method="get" action="/register">
