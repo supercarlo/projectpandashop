@@ -6,7 +6,7 @@
 </head>
 <body>
 <#assign test = 1>
-<#assign test2 = 0>
+<#assign test2 = 1>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">

@@ -14,38 +14,51 @@ public class User { // create a customer (with an andress) in DataBase
         boolean usernameAvailibility = true;
         DBC databasePandaShop = new DBC();
         Statement stat = databasePandaShop.Connection();
-            int countExistenceofUsername = 0;
-            try {
-                String query = ("select usernamecustomer from Customer where usernamecustomer = '" + UsernameCustomer + "' ;");
-                ResultSet rs = stat.executeQuery(query);
-                if (rs.next()) {
-                    countExistenceofUsername++;
-                }
-                rs.close();
-            } catch (Exception e) {
-                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
+        int countExistenceofUsername = 0;
+        try {
+            String query = ("select usernamecustomer from Customer where usernamecustomer = '" + UsernameCustomer + "' ;");
+            ResultSet rs = stat.executeQuery(query);
+            if (rs.next()) {
+                countExistenceofUsername++;
             }
-
-            if (countExistenceofUsername == 1) {
-                usernameAvailibility = false;
-            }
-
-            if (usernameAvailibility == true) {
-                try{
-                    System.out.println("rodeRadicalen");
-                String query = ("insert into customer(usernamecustomer, passwordcustomer, userlevel ,firstname, lastname, birthdate, creditcardinfo, membersince) values('" + UsernameCustomer + "', '" + PasswordCustomer + "', '" + Level + "', '" + firstname + "', '" + LastName + "', '" + BirthDate + "', '" + CreditCardInfo + "', '" + MemberSince + "');");
-                stat.executeUpdate(query);
-                System.out.println("test1");
-                stat.getConnection().commit();
-            } catch(Exception e){                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
-
-            }
+            rs.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
         return usernameAvailibility;
-
     }
+//public class User {
+//    public void createCustomer(String UsernameCustomer, String PasswordCustomer, String Level, String firstname, String LastName, String BirthDate, String CreditCardInfo, String MemberSince) {
+//        try {
+//            DBC databasePandaShop = new DBC();
+//            Statement stat = databasePandaShop.Connection();
+//            String query = (("insert into Customer(usernameCustomer, passwordCustomer, userlevel ,firstname, lastname, birthdate, creditcardinfo, membersince) values("+ UsernameCustomer+ ", "+ PasswordCustomer + ", " + Level+ ",user " + firstname + ", " + LastName + ", " + BirthDate + ", " + CreditCardInfo + ", " + MemberSince + ""));
+//            ResultSet rs = stat.executeQuery(query);
+//            rs.close();
+//        } catch (Exception e) {
+//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//            System.exit(0);
+//        }
+//
+//            if (countExistenceofUsername == 1) {
+//                usernameAvailibility = false;
+//            }
+//
+//            if (usernameAvailibility == true) {
+//                try{
+//                    System.out.println("rodeRadicalen");
+//                String query = ("insert into customer(usernamecustomer, passwordcustomer, userlevel ,firstname, lastname, birthdate, creditcardinfo, membersince) values('" + UsernameCustomer + "', '" + PasswordCustomer + "', '" + Level + "', '" + firstname + "', '" + LastName + "', '" + BirthDate + "', '" + CreditCardInfo + "', '" + MemberSince + "');");
+//                stat.executeUpdate(query);
+//                System.out.println("test1");
+//                stat.getConnection().commit();
+//            } catch(Exception e){                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//                System.exit(0);
+//
+//            }
+//        }
+//        return usernameAvailibility;
+
     public void deleteCustomer(String UsernameCustomer){
         try {
             DBC databasePandaShop = new DBC();
